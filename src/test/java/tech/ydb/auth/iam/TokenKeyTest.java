@@ -1,4 +1,4 @@
-package ru.yandex.ydb.auth.iam;
+package tech.ydb.auth.iam;
 
 
 import java.security.PrivateKey;

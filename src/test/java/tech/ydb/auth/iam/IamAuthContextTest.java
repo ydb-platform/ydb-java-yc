@@ -1,7 +1,8 @@
-package ru.yandex.ydb.auth.iam;
+package tech.ydb.auth.iam;
 
 import java.security.PrivateKey;
 
+import tech.ydb.core.auth.AuthProvider;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,8 +11,6 @@ import org.junit.Test;
 import org.mockserver.junit.MockServerRule;
 import org.mockserver.model.HttpRequest;
 import org.mockserver.model.HttpResponse;
-
-import ru.yandex.ydb.core.auth.AuthProvider;
 
 
 /**

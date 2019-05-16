@@ -32,7 +32,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>ru.yandex.cloud</groupId>
+      <groupId>com.yandex.cloud</groupId>
       <artifactId>ydb-sdk-core</artifactId>
       <version>${ydb.sdk.version}</version>
     </dependency>

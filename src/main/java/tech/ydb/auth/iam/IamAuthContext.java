@@ -1,4 +1,4 @@
-package ru.yandex.ydb.auth.iam;
+package tech.ydb.auth.iam;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -19,8 +19,7 @@ import java.util.concurrent.TimeUnit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import ru.yandex.ydb.core.auth.AuthProvider;
+import tech.ydb.core.auth.AuthProvider;
 
 
 /**
