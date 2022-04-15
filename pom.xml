@@ -1,54 +1,44 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>tech.ydb.auth</groupId>
+    <groupId>tech.ydb.auth</groupId>
 
-  <artifactId>yc-auth-creditals</artifactId>
+    <artifactId>yc-auth-creditals</artifactId>
     <version>1.0.0</version>
-  <name>Yandex Cloud IAM authentication module</name>
-  <description>Yandex Cloud IAM authentication module</description>
+    <name>Yandex Cloud IAM authentication module</name>
+    <description>Yandex Cloud IAM authentication module</description>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <maven.compiler.source>1.8</maven.compiler.source>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <ydb.sdk.version>1.11.3</ydb.sdk.version>
+        <ydb.sdk.version>1.11.4</ydb.sdk.version>
     </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>tech.ydb</groupId>
-      <artifactId>ydb-sdk-core</artifactId>
-      <version>${ydb.sdk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.yandex.cloud</groupId>
-      <artifactId>java-sdk-auth</artifactId>
-      <version>2.0.0</version>
-      <exclusions>
-          <exclusion>
-              <groupId>io.grpc</groupId>
-              <artifactId>grpc-netty-shaded</artifactId>
-          </exclusion>
-          <exclusion>
-              <groupId>io.grpc</groupId>
-              <artifactId>grpc-services</artifactId>
-          </exclusion>
-      </exclusions>
-    </dependency>
-	<dependency>
-	  <groupId>junit</groupId>
-	  <artifactId>junit</artifactId>
-	  <version>4.13.1</version>
-      <scope>test</scope>
-	</dependency>
-	<dependency>
-	  <groupId>org.mock-server</groupId>
-	  <artifactId>mockserver-netty</artifactId>
-	  <version>5.5.4</version>
-      <scope>test</scope>
-	</dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>tech.ydb</groupId>
+            <artifactId>ydb-sdk-core</artifactId>
+            <version>${ydb.sdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yandex.cloud</groupId>
+            <artifactId>java-sdk-auth</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-netty</artifactId>
+            <version>5.5.4</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
