@@ -14,7 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
         <ydb.sdk.version>1.12.2</ydb.sdk.version>
+        <yandex.cloud.sdk.version>2.0.0</yandex.cloud.sdk.version>
+        <junit.version>4.13.2</junit.version>
+        <log4j2.version>2.17.2</log4j2.version>
     </properties>
 
     <dependencies>
@@ -26,16 +30,18 @@
         <dependency>
             <groupId>com.yandex.cloud</groupId>
             <artifactId>java-sdk-auth</artifactId>
-            <version>2.0.0</version>
+            <version>${yandex.cloud.sdk.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
