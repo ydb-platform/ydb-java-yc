@@ -28,6 +28,7 @@
             <version>${ydb.sdk.version}</version>
         </dependency>
         <dependency>
+            <!-- Sync with grpc-java version -->
             <groupId>com.yandex.cloud</groupId>
             <artifactId>java-sdk-auth</artifactId>
             <version>${yandex.cloud.sdk.version}</version>
