@@ -10,6 +10,12 @@
         <Logger name="io.netty" level="warn" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
+        <Logger name="com.networknt.schema" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.mockserver" level="error" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
         <Logger name="tech.ydb.core.grpc" level="error" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>

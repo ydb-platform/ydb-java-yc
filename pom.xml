@@ -16,9 +16,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <ydb.sdk.version>2.0.0-SNAPSHOT</ydb.sdk.version>
-        <yandex.cloud.sdk.version>2.5.0</yandex.cloud.sdk.version>
+        <yandex.cloud.sdk.version>2.5.1</yandex.cloud.sdk.version>
         <junit.version>4.13.2</junit.version>
-        <log4j2.version>2.17.2</log4j2.version>
+        <log4j2.version>2.18.0</log4j2.version>
+        <mockserver.version>5.13.2</mockserver.version>
     </properties>
 
     <dependencies>
@@ -47,8 +48,14 @@
         </dependency>
         <dependency>
             <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-junit-rule</artifactId>
+            <version>${mockserver.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mock-server</groupId>
             <artifactId>mockserver-netty</artifactId>
-            <version>5.5.4</version>
+            <version>${mockserver.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
