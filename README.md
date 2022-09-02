@@ -19,7 +19,7 @@ Specify the YDB Java Protobuf module in the dependencies:
 ```xml
 <dependency>
     <groupId>tech.ydb.auth</groupId>
-    <artifactId>yc-auth-creditals</artifactId>
+    <artifactId>yc-auth-provider</artifactId>
     <version>2.0.0-RC2</version>
 </dependency>
 ```

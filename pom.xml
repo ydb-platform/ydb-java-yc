@@ -5,7 +5,7 @@
 
     <groupId>tech.ydb.auth</groupId>
 
-    <artifactId>yc-auth-creditals</artifactId>
+    <artifactId>yc-auth-provider</artifactId>
     <version>2.0.0-RC2</version>
     <name>Yandex Cloud IAM authentication module</name>
     <description>Yandex Cloud IAM authentication module</description>
