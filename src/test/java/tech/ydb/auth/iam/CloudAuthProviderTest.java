@@ -37,7 +37,7 @@ public class CloudAuthProviderTest {
 
     @Test
     public void getToken() {
-        CloudAuthProvider authProvider = CloudAuthProvider.newAuthProvider(credentialProvider);
+        CloudAuthIdentity authProvider = new CloudAuthIdentity(credentialProvider);
         Assert.assertEquals("my-awesome-token", authProvider.getToken());
     }
 }
