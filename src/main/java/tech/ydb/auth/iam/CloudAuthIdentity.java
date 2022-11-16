@@ -2,12 +2,12 @@ package tech.ydb.auth.iam;
 
 import java.nio.file.Path;
 
-import tech.ydb.core.auth.AuthIdentity;
-
 import yandex.cloud.sdk.auth.provider.ApiKeyCredentialProvider;
 import yandex.cloud.sdk.auth.provider.ComputeEngineCredentialProvider;
 import yandex.cloud.sdk.auth.provider.CredentialProvider;
 import yandex.cloud.sdk.auth.provider.IamTokenCredentialProvider;
+
+import tech.ydb.auth.AuthIdentity;
 
 public class CloudAuthIdentity implements AuthIdentity {
     CredentialProvider credentialProvider;
@@ -21,7 +21,7 @@ public class CloudAuthIdentity implements AuthIdentity {
         return credentialProvider.get().getToken();
     }
 
-    
+
     public static AuthIdentity metadataIdentity() {
         return new CloudAuthIdentity(
                 ComputeEngineCredentialProvider.builder()
