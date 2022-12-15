@@ -48,7 +48,7 @@ public class CloudAuthHelper {
     }
 
     public static AuthProvider getMetadataAuthProvider() {
-        return () -> CloudAuthIdentity.metadataIdentity();
+        return CloudAuthIdentity::metadataIdentity;
     }
 
     public static AuthProvider getServiceAccountFileAuthProvider(String filePath) {

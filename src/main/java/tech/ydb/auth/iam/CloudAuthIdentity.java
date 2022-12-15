@@ -21,7 +21,6 @@ public class CloudAuthIdentity implements AuthIdentity {
         return credentialProvider.get().getToken();
     }
 
-
     public static AuthIdentity metadataIdentity() {
         return new CloudAuthIdentity(
                 ComputeEngineCredentialProvider.builder()
