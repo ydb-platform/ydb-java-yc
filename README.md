@@ -1,5 +1,5 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ydb-platform/ydb-java-yc/blob/main/LICENSE)
-![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Ftech%2Fydb%2Fauth%2Fyc-auth-provider%2Fmaven-metadata.xml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ydb-platform/ydb-java-yc/blob/master/LICENSE)
+[![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Ftech%2Fydb%2Fauth%2Fyc-auth-provider%2Fmaven-metadata.xml)](https://mvnrepository.com/artifact/tech.ydb.auth/ydb-auth-provider)
 
 ## YDB Yandex Cloud IAM provider
 > Module to connect to YDB inside yandex-cloud
@@ -20,6 +20,6 @@ Specify the YDB Java Protobuf module in the dependencies:
 <dependency>
     <groupId>tech.ydb.auth</groupId>
     <artifactId>yc-auth-provider</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```

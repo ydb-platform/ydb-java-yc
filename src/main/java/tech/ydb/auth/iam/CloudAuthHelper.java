@@ -20,7 +20,7 @@ import tech.ydb.auth.AuthProvider;
  * @author Vasilii Briginets
  */
 public class CloudAuthHelper {
-    
+
     public static AuthProvider getAuthProviderFromEnviron() {
         return () -> {
             String anonCredentials = System.getenv("YDB_ANONYMOUS_CREDENTIALS");
@@ -46,7 +46,7 @@ public class CloudAuthHelper {
             return CloudAuthIdentity.metadataIdentity();
         };
     }
-    
+
     public static AuthProvider getMetadataAuthProvider() {
         return CloudAuthIdentity::metadataIdentity;
     }
