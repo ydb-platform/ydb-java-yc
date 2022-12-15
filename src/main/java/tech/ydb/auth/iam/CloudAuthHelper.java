@@ -2,7 +2,7 @@ package tech.ydb.auth.iam;
 
 import java.nio.file.Paths;
 
-import tech.ydb.core.auth.AuthProvider;
+import tech.ydb.auth.AuthProvider;
 
 
 /**
@@ -22,7 +22,7 @@ import tech.ydb.core.auth.AuthProvider;
 public class CloudAuthHelper {
     
     public static AuthProvider getAuthProviderFromEnviron() {
-        return (opt) -> {
+        return () -> {
             String anonCredentials = System.getenv("YDB_ANONYMOUS_CREDENTIALS");
             if (anonCredentials != null && anonCredentials.equals("1")) {
                 return null;
@@ -48,10 +48,10 @@ public class CloudAuthHelper {
     }
     
     public static AuthProvider getMetadataAuthProvider() {
-        return (opt) -> CloudAuthIdentity.metadataIdentity();
+        return CloudAuthIdentity::metadataIdentity;
     }
 
     public static AuthProvider getServiceAccountFileAuthProvider(String filePath) {
-        return (opt) -> CloudAuthIdentity.serviceAccountIdentity(Paths.get(filePath));
+        return () -> CloudAuthIdentity.serviceAccountIdentity(Paths.get(filePath));
     }
 }

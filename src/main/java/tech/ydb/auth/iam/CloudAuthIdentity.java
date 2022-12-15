@@ -2,7 +2,7 @@ package tech.ydb.auth.iam;
 
 import java.nio.file.Path;
 
-import tech.ydb.core.auth.AuthIdentity;
+import tech.ydb.auth.AuthIdentity;
 
 import yandex.cloud.sdk.auth.provider.ApiKeyCredentialProvider;
 import yandex.cloud.sdk.auth.provider.ComputeEngineCredentialProvider;
