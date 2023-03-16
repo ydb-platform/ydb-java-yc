@@ -10,7 +10,7 @@ import yandex.cloud.sdk.auth.provider.IamTokenCredentialProvider;
 import tech.ydb.auth.AuthIdentity;
 
 public class CloudAuthIdentity implements AuthIdentity {
-    CredentialProvider credentialProvider;
+    private CredentialProvider credentialProvider;
 
     CloudAuthIdentity(CredentialProvider credentialProvider) {
         this.credentialProvider = credentialProvider;
@@ -19,6 +19,11 @@ public class CloudAuthIdentity implements AuthIdentity {
     @Override
     public String getToken() {
         return credentialProvider.get().getToken();
+    }
+
+    @Override
+    public void close() {
+        credentialProvider.close();
     }
 
     public static AuthIdentity metadataIdentity() {
