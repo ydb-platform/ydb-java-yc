@@ -56,14 +56,6 @@
             <groupId>com.yandex.cloud</groupId>
             <artifactId>java-sdk-auth</artifactId>
             <version>${yandex.cloud.sdk.version}</version>
-
-            <exclusions>
-                <!-- Exclude fat dependency -->
-                <exclusion>
-                    <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcprov-jdk15on</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
