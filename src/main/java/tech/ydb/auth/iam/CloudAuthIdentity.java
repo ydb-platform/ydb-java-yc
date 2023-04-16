@@ -10,7 +10,7 @@ import yandex.cloud.sdk.auth.provider.IamTokenCredentialProvider;
 import tech.ydb.auth.AuthIdentity;
 
 public class CloudAuthIdentity implements AuthIdentity {
-    private CredentialProvider credentialProvider;
+    private final CredentialProvider credentialProvider;
 
     CloudAuthIdentity(CredentialProvider credentialProvider) {
         this.credentialProvider = credentialProvider;
@@ -46,6 +46,15 @@ public class CloudAuthIdentity implements AuthIdentity {
         return new CloudAuthIdentity(
                 ApiKeyCredentialProvider.builder()
                         .fromFile(serviceAccountFile)
+                        .enableCache()
+                        .build()
+        );
+    }
+
+    public static AuthIdentity serviceAccountIdentity(String serviceAccountJson) {
+        return new CloudAuthIdentity(
+                ApiKeyCredentialProvider.builder()
+                        .fromJson(serviceAccountJson)
                         .enableCache()
                         .build()
         );
