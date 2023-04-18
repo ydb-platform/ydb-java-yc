@@ -54,4 +54,8 @@ public class CloudAuthHelper {
     public static AuthProvider getServiceAccountFileAuthProvider(String filePath) {
         return () -> CloudAuthIdentity.serviceAccountIdentity(Paths.get(filePath));
     }
+
+    public static AuthProvider getServiceAccountJsonAuthProvider(String json) {
+        return () -> CloudAuthIdentity.serviceAccountIdentity(json);
+    }
 }
