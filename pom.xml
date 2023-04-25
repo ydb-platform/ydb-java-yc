@@ -170,8 +170,9 @@
 
                     <relocations>
                         <relocation>
-                            <pattern>yandex.cloud</pattern>
-                            <shadedPattern>tech.ydb.auth.shaded.yandex.cloud</shadedPattern>
+                            <rawString>true</rawString>
+                            <pattern>yandex/cloud</pattern>
+                            <shadedPattern>tech/ydb/auth/shaded/yandex/cloud</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
