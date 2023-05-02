@@ -5,23 +5,14 @@
 
     <groupId>tech.ydb.auth</groupId>
 
-    <artifactId>yc-auth-provider</artifactId>
+    <artifactId>yc-auth-provider-parent</artifactId>
     <version>2.1.0-SNAPSHOT</version>
-    <name>Yandex Cloud IAM authentication module</name>
-    <description>Yandex Cloud IAM authentication module</description>
+    <packaging>pom</packaging>
+
+    <name>Yandex Cloud IAM for YDB</name>
+    <description>Yandex Cloud IAM for YDB parent module</description>
+
     <url>https://github.com/ydb-platform/ydb-java-yc</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-
-        <yandex.cloud.sdk.version>2.6.0</yandex.cloud.sdk.version>
-        <ydb.auth-api.version>1.0.0-SNAPSHOT</ydb.auth-api.version>
-        <junit.version>4.13.2</junit.version>
-        <log4j2.version>2.18.0</log4j2.version>
-        <mockserver.version>5.13.2</mockserver.version>
-    </properties>
 
     <licenses>
         <license>
@@ -45,148 +36,118 @@
         </developer>
     </developers>
 
-    <dependencies>
-        <dependency>
-            <groupId>tech.ydb</groupId>
-            <artifactId>ydb-auth-api</artifactId>
-            <version>${ydb.auth-api.version}</version>
-        </dependency>
-        <dependency>
-            <!-- Sync with grpc-java version -->
-            <groupId>com.yandex.cloud</groupId>
-            <artifactId>java-sdk-auth</artifactId>
-            <version>${yandex.cloud.sdk.version}</version>
-        </dependency>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mock-server</groupId>
-            <artifactId>mockserver-junit-rule</artifactId>
-            <version>${mockserver.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mock-server</groupId>
-            <artifactId>mockserver-netty</artifactId>
-            <version>${mockserver.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+        <yandex.cloud.sdk.version>2.6.0</yandex.cloud.sdk.version>
+        <ydb.auth-api.version>1.0.0-SNAPSHOT</ydb.auth-api.version>
+        <junit.version>4.13.2</junit.version>
+        <log4j2.version>2.18.0</log4j2.version>
+        <mockserver.version>5.13.2</mockserver.version>
+    </properties>
+
+    <modules>
+        <module>provider</module>
+        <module>provider-shaded</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.ydb</groupId>
+                <artifactId>ydb-auth-api</artifactId>
+                <version>${ydb.auth-api.version}</version>
+            </dependency>
+            <dependency>
+                <!-- Sync with grpc-java version -->
+                <groupId>com.yandex.cloud</groupId>
+                <artifactId>java-sdk-auth</artifactId>
+                <version>${yandex.cloud.sdk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.ydb.auth</groupId>
+                <artifactId>yc-auth-provider</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mock-server</groupId>
+                <artifactId>mockserver-junit-rule</artifactId>
+                <version>${mockserver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mock-server</groupId>
+                <artifactId>mockserver-netty</artifactId>
+                <version>${mockserver.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
-                <configuration>
-                    <target>1.8</target>
-                    <source>1.8</source>
-                    <compilerArgs>
-                        <arg>-Xlint</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <source>8</source>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.0</version>
-                <configuration>
-                    <minimizeJar>true</minimizeJar>
-
-                    <shadedArtifactAttached>true</shadedArtifactAttached>
-                    <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
-                    <createDependencyReducedPom>true</createDependencyReducedPom>
-                    <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-
-                    <artifactSet>
-                        <includes>
-                            <include>com.yandex.cloud:java-sdk-auth</include>
-                            <include>com.yandex.cloud:java-genproto</include>
-                        </includes>
-                    </artifactSet>
-
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludes>
-                                <exclude>META-INF/MANIFEST.MF</exclude>
-                            </excludes>
-                        </filter>
-                        <filter>
-                            <artifact>com.yandex.cloud:java-genproto</artifact>
-                            <includes>
-                                <include>yandex/cloud/api/*.class</include>
-                                <include>yandex/cloud/api/iam/v1/*.class</include>
-                            </includes>
-                        </filter>
-                    </filters>
-
-                    <relocations>
-                        <relocation>
-                            <rawString>true</rawString>
-                            <pattern>yandex/cloud</pattern>
-                            <shadedPattern>tech/ydb/auth/shaded/yandex/cloud</shadedPattern>
-                        </relocation>
-                    </relocations>
-                </configuration>
-
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <configuration>
+                        <target>1.8</target>
+                        <source>1.8</source>
+                        <compilerArgs>
+                            <arg>-Xlint</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <configuration>
+                        <source>8</source>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
