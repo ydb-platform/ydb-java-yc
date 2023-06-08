@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build YDB Java SDK
+    name: Build YC Auth proivder
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,7 +21,8 @@ jobs:
         MAVEN_ARGS: --batch-mode --update-snapshots -Dstyle.color=always
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -30,14 +31,35 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Get version
+      - name: Extract Auth API version
         run: |
-          VERSION=(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "::set-output name=version::$VERSION"
+          VERSION=$(mvn help:evaluate -Dexpression=ydb.auth-api.version -q -DforceStdout)
+          echo "AUTH_API_VERSION=$VERSION" >> "$GITHUB_ENV"
 
-      - name: Prebuild SDK
-        if: ${{ endsWith(env.VERSION, 'SNAPSHOT') }}
+      - name: Check Auth API version
+        run: |
+          echo "NEED_SDK=${{ endsWith(env.AUTH_API_VERSION, 'SNAPSHOT') }}" >> "$GITHUB_ENV"
+
+      - name: Checkout YDB Java SDK
+        if: ${{ env.NEED_SDK }}
+        uses: actions/checkout@v3
+        with:
+          repository: ydb-platform/ydb-java-sdk
+          ref: develop
+          path: ydb-java-sdk
+
+      - name: Build Auth API module
+        working-directory: ./ydb-java-sdk/auth-api
+        if: ${{ env.NEED_SDK }}
+        run: mvn $MAVEN_ARGS install
+
+      - name: Remove YDB Java SDK
+        if: ${{ env.NEED_SDK }}
+        run: rm -rf ydb-java-sdk
+
+      - name: Download dependencies
+        run: mvn $MAVEN_ARGS dependency:go-offline
 
       - name: Build with Maven
-        run: mvn $MAVEN_ARGS verify
+        run: mvn $MAVEN_ARGS package
 
