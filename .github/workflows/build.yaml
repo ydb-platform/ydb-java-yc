@@ -1,0 +1,43 @@
+name: Build Yandex Cloud auth provider
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+      type: [opened, reopened, edited]
+
+jobs:
+  build:
+    name: Build YDB Java SDK
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java: [ '8', '11', '17']
+
+    env:
+        MAVEN_ARGS: --batch-mode --update-snapshots -Dstyle.color=always
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Get version
+        run: |
+          VERSION=(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "::set-output name=version::$VERSION"
+
+      - name: Prebuild SDK
+        if: ${{ endsWith(env.VERSION, 'SNAPSHOT') }}
+
+      - name: Build with Maven
+        run: mvn $MAVEN_ARGS verify
+

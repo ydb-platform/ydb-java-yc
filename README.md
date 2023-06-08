@@ -1,5 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ydb-platform/ydb-java-yc/blob/master/LICENSE)
 [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Ftech%2Fydb%2Fauth%2Fyc-auth-provider%2Fmaven-metadata.xml)](https://mvnrepository.com/artifact/tech.ydb.auth/ydb-auth-provider)
+[![Build](https://img.shields.io/github/actions/workflow/status/ydb-platform/ydb-java-yc/build.yaml?branch=develop)](https://github.com/ydb-platform/ydb-java-yc/actions/workflows/build.yaml)
 
 ## YDB Yandex Cloud IAM provider
 > Module to connect to YDB inside yandex-cloud
