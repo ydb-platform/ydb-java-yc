@@ -38,6 +38,8 @@
                 <configuration>
                     <minimizeJar>true</minimizeJar>
 
+                    <createSourcesJar>true</createSourcesJar>
+
                     <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
                     <createDependencyReducedPom>true</createDependencyReducedPom>
                     <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
