@@ -26,9 +26,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
                 <configuration>
                     <forceCreation>true</forceCreation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <includeDependencySources>true</includeDependencySources>
+                    <dependencySourceIncludes>
+                        <dependencySourceInclude>tech.ydb.auth:yc-auth-provider</dependencySourceInclude>
+                        <dependencySourceInclude>com.yandex.cloud:java-sdk-auth</dependencySourceInclude>
+                    </dependencySourceIncludes>
                 </configuration>
             </plugin>
             <plugin>
