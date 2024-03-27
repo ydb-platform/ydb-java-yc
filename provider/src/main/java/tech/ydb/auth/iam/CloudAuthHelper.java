@@ -30,12 +30,12 @@ public class CloudAuthHelper {
 
             String saKeyFile = System.getenv("YDB_SERVICE_ACCOUNT_KEY_FILE_CREDENTIALS");
             if (saKeyFile != null) {
-                return CloudAuthIdentity.serviceAccountIdentity(Paths.get(saKeyFile));
+                return CloudAuthIdentity.serviceAccountIdentity(Paths.get(saKeyFile), null);
             }
 
             String metadataCredentials = System.getenv("YDB_METADATA_CREDENTIALS");
             if (metadataCredentials != null && metadataCredentials.equals("1")) {
-                return CloudAuthIdentity.metadataIdentity();
+                return CloudAuthIdentity.metadataIdentity(null);
             }
 
             String accessToken = System.getenv("YDB_ACCESS_TOKEN_CREDENTIALS");
@@ -43,19 +43,31 @@ public class CloudAuthHelper {
                 return CloudAuthIdentity.iamTokenIdentity(accessToken);
             }
 
-            return CloudAuthIdentity.metadataIdentity();
+            return CloudAuthIdentity.metadataIdentity(null);
         };
     }
 
     public static AuthProvider getMetadataAuthProvider() {
-        return CloudAuthIdentity::metadataIdentity;
+        return getMetadataAuthProvider(null);
     }
 
     public static AuthProvider getServiceAccountFileAuthProvider(String filePath) {
-        return () -> CloudAuthIdentity.serviceAccountIdentity(Paths.get(filePath));
+        return () -> CloudAuthIdentity.serviceAccountIdentity(Paths.get(filePath), null);
     }
 
     public static AuthProvider getServiceAccountJsonAuthProvider(String json) {
-        return () -> CloudAuthIdentity.serviceAccountIdentity(json);
+        return () -> CloudAuthIdentity.serviceAccountIdentity(json, null);
+    }
+
+    public static AuthProvider getMetadataAuthProvider(String metadataURL) {
+        return () -> CloudAuthIdentity.metadataIdentity(metadataURL);
+    }
+
+    public static AuthProvider getServiceAccountFileAuthProvider(String filePath, String iamEndpoint) {
+        return () -> CloudAuthIdentity.serviceAccountIdentity(Paths.get(filePath), iamEndpoint);
+    }
+
+    public static AuthProvider getServiceAccountJsonAuthProvider(String json, String iamEndpoint) {
+        return () -> CloudAuthIdentity.serviceAccountIdentity(json, iamEndpoint);
     }
 }
