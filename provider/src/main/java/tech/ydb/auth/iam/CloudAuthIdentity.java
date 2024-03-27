@@ -26,12 +26,12 @@ public class CloudAuthIdentity implements AuthIdentity {
         credentialProvider.close();
     }
 
-    public static AuthIdentity metadataIdentity() {
-        return new CloudAuthIdentity(
-                ComputeEngineCredentialProvider.builder()
-                        .enableCache()
-                        .build()
-        );
+    public static AuthIdentity metadataIdentity(String metadataURL) {
+        ComputeEngineCredentialProvider.Builder builder = ComputeEngineCredentialProvider.builder();
+        if (metadataURL != null && !metadataURL.isEmpty()) {
+            builder = builder.metadataServerUrl(metadataURL);
+        }
+        return new CloudAuthIdentity(builder.enableCache().build());
     }
 
     public static AuthIdentity iamTokenIdentity(String accessToken) {
@@ -42,21 +42,20 @@ public class CloudAuthIdentity implements AuthIdentity {
         );
     }
 
-    public static AuthIdentity serviceAccountIdentity(Path serviceAccountFile) {
-        return new CloudAuthIdentity(
-                ApiKeyCredentialProvider.builder()
-                        .fromFile(serviceAccountFile)
-                        .enableCache()
-                        .build()
-        );
+    public static AuthIdentity serviceAccountIdentity(Path serviceAccountFile, String iamEndpoint) {
+        ApiKeyCredentialProvider.Builder builder = ApiKeyCredentialProvider.builder().fromFile(serviceAccountFile);
+        if (iamEndpoint != null && !iamEndpoint.isEmpty()) {
+            builder = builder.cloudIAMEndpoint(iamEndpoint);
+        }
+        return new CloudAuthIdentity(builder.enableCache().build());
     }
 
-    public static AuthIdentity serviceAccountIdentity(String serviceAccountJson) {
-        return new CloudAuthIdentity(
-                ApiKeyCredentialProvider.builder()
-                        .fromJson(serviceAccountJson)
-                        .enableCache()
-                        .build()
-        );
+    public static AuthIdentity serviceAccountIdentity(String serviceAccountJson, String iamEndpoint) {
+        ApiKeyCredentialProvider.Builder builder = ApiKeyCredentialProvider.builder().fromJson(serviceAccountJson);
+        if (iamEndpoint != null && !iamEndpoint.isEmpty()) {
+            builder = builder.cloudIAMEndpoint(iamEndpoint);
+        }
+        return new CloudAuthIdentity(builder.enableCache().build());
     }
+
 }
