@@ -17,7 +17,8 @@ import yandex.cloud.sdk.auth.provider.CredentialProvider;
 public class CloudAuthProviderTest {
 
     @Rule
-    public MockServerRule mockServerRule = new MockServerRule(this);
+    public final MockServerRule mockServerRule = new MockServerRule(this);
+
     private CredentialProvider credentialProvider;
 
     @Before
