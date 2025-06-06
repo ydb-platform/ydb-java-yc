@@ -45,7 +45,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ydb-platform/ydb-java-sdk
-          ref: develop
           path: ydb-java-sdk
 
       - name: Build Auth API module
