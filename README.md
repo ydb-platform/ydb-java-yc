@@ -21,6 +21,6 @@ Specify the YDB Java Protobuf module in the dependencies:
 <dependency>
     <groupId>tech.ydb.auth</groupId>
     <artifactId>yc-auth-provider</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
