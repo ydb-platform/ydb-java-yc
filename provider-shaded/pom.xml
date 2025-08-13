@@ -19,6 +19,17 @@
             <groupId>tech.ydb.auth</groupId>
             <artifactId>yc-auth-provider</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
