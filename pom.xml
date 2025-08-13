@@ -6,7 +6,7 @@
     <groupId>tech.ydb.auth</groupId>
 
     <artifactId>yc-auth-provider-parent</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
     <packaging>pom</packaging>
 
     <name>Yandex Cloud IAM for YDB</name>
@@ -41,8 +41,12 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <yandex.cloud.sdk.version>2.6.4</yandex.cloud.sdk.version>
         <ydb.auth-api.version>1.0.0</ydb.auth-api.version>
+        <grpc.version>1.68.3</grpc.version>
+        <jjwt.version>0.12.6</jjwt.version>
+        <bouncycastle.version>1.78.1</bouncycastle.version>
+        <yandex.cloud.sdk.version>2.8.0</yandex.cloud.sdk.version>
+
         <junit.version>4.13.2</junit.version>
         <log4j2.version>2.22.1</log4j2.version>
         <mockserver.version>5.11.2</mockserver.version>
@@ -56,15 +60,54 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-bom</artifactId>
+                <version>${grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>tech.ydb</groupId>
                 <artifactId>ydb-auth-api</artifactId>
                 <version>${ydb.auth-api.version}</version>
             </dependency>
+
             <dependency>
-                <!-- Sync with grpc-java version -->
                 <groupId>com.yandex.cloud</groupId>
-                <artifactId>java-sdk-auth</artifactId>
+                <artifactId>java-genproto</artifactId>
                 <version>${yandex.cloud.sdk.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.grpc</groupId>
+                        <artifactId>grpc-services</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- BouncyCastle -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+            <!-- JJwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
 
             <dependency>
