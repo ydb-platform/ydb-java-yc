@@ -42,10 +42,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <ydb.auth-api.version>1.0.0</ydb.auth-api.version>
+
         <grpc.version>1.68.3</grpc.version>
+        <!-- must be equal version in grpc-protobuf pom.xml -->
+        <google.protobuf.version>3.25.5</google.protobuf.version>
+
         <jjwt.version>0.12.6</jjwt.version>
         <bouncycastle.version>1.78.1</bouncycastle.version>
-        <yandex.cloud.sdk.version>2.8.0</yandex.cloud.sdk.version>
 
         <junit.version>4.13.2</junit.version>
         <log4j2.version>2.22.1</log4j2.version>

@@ -56,7 +56,6 @@
                     <artifactSet>
                         <includes>
                             <include>tech.ydb.auth:yc-auth-provider</include>
-                            <include>com.yandex.cloud:java-genproto</include>
                         </includes>
                     </artifactSet>
 
