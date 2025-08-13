@@ -3,6 +3,7 @@ package tech.ydb.auth.iam;
 import java.nio.file.Path;
 
 import yandex.cloud.sdk.auth.provider.ApiKeyCredentialProvider;
+import yandex.cloud.sdk.auth.provider.CachingCredentialProvider;
 import yandex.cloud.sdk.auth.provider.ComputeEngineCredentialProvider;
 import yandex.cloud.sdk.auth.provider.CredentialProvider;
 import yandex.cloud.sdk.auth.provider.IamTokenCredentialProvider;
@@ -31,7 +32,7 @@ public class CloudAuthIdentity implements AuthIdentity {
         if (metadataURL != null && !metadataURL.isEmpty()) {
             builder = builder.metadataServerUrl(metadataURL);
         }
-        return new CloudAuthIdentity(builder.enableCache().build());
+        return new CloudAuthIdentity(new CachingCredentialProvider(builder));
     }
 
     public static AuthIdentity iamTokenIdentity(String accessToken) {
@@ -47,7 +48,7 @@ public class CloudAuthIdentity implements AuthIdentity {
         if (iamEndpoint != null && !iamEndpoint.isEmpty()) {
             builder = builder.cloudIAMEndpoint(iamEndpoint);
         }
-        return new CloudAuthIdentity(builder.enableCache().build());
+        return new CloudAuthIdentity(new CachingCredentialProvider(builder));
     }
 
     public static AuthIdentity serviceAccountIdentity(String serviceAccountJson, String iamEndpoint) {
@@ -55,7 +56,7 @@ public class CloudAuthIdentity implements AuthIdentity {
         if (iamEndpoint != null && !iamEndpoint.isEmpty()) {
             builder = builder.cloudIAMEndpoint(iamEndpoint);
         }
-        return new CloudAuthIdentity(builder.enableCache().build());
+        return new CloudAuthIdentity(new CachingCredentialProvider(builder));
     }
 
 }
