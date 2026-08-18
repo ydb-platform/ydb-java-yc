@@ -22,10 +22,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
@@ -42,7 +42,7 @@ jobs:
 
       - name: Checkout YDB Java SDK
         if: ${{ env.NEED_SDK }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ydb-platform/ydb-java-sdk
           path: ydb-java-sdk
