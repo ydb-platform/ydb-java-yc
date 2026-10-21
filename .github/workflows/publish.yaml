@@ -8,11 +8,11 @@ on:
 jobs:
   validate:
     name: Validate Yandex Cloud auth provider
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           submodules: true
 
@@ -23,18 +23,18 @@ jobs:
 
       - name: Fail workflow if version is snapsot
         if: ${{ endsWith(env.YCAUTH_VERSION, 'SNAPSHOT') }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v9
         with:
           script: core.setFailed('SNAPSHOT version cannot be published')
 
       - name: Fail workflow if version is not equal to tag name
         if: ${{ format('v{0}', env.YCAUTH_VERSION) != github.ref_name }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v9
         with:
           script: core.setFailed('Release name must be equal to project version')
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 8
           distribution: 'temurin'
@@ -48,7 +48,7 @@ jobs:
 
   publish:
     name: Publish Yandex Cloud auth provider
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: validate
 
     env:
@@ -63,24 +63,25 @@ jobs:
           gpg --list-secret-keys --keyid-format LONG
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           submodules: true
 
       - name: Set up Maven Central Repository
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 8
           distribution: 'temurin'
           cache: 'maven'
           server-id: ossrh-s01
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+          server-username-env-var: MAVEN_USERNAME
+          server-password-env-var: MAVEN_PASSWORD
 
       - name: Publish package
         run: |
-          mvn $MAVEN_ARGS -Possrh-s01 -Dgpg.passphrase=${{ secrets.MAVEN_OSSRH_GPG_PASSWORD }} clean deploy
+          mvn $MAVEN_ARGS -Possrh-s01 clean deploy
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_OSSRH_GPG_PASSWORD }}
 
